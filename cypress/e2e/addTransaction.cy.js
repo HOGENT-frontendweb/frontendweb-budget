@@ -35,4 +35,15 @@ describe('Add and remove transaction', () => {
 
     cy.get('[data-cy=label_input_error]').contains('0 is not a valid amount');
   });
+
+  it('should show error message for an invalid amount', () => {
+    cy.visit('http://localhost:5173/transactions/add');
+
+    cy.get('[data-cy=date_input]').type('2024-08-01'); 
+    cy.get('[data-cy=place_input]').select(3); 
+    cy.get('[data-cy=amount_input]').type(0);
+    cy.get('body').click(0, 0);
+    cy.get('[data-cy=submit_transaction]').click(); 
+    cy.get('[data-cy=label_input_error]').contains('0 is not a valid amount');
+  });
 });
