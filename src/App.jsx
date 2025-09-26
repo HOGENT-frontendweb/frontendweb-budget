@@ -1,5 +1,6 @@
 import Transaction from './components/transactions/Transaction';
-import TRANSACTION_DATA from './api/mock_data';
+import PlacesList from './components/places/PlacesList';
+import { TRANSACTION_DATA } from './api/mock_data';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
         Budget App
       </h1>
       {TRANSACTION_DATA.map((t) => (<Transaction {...t} key={t.id} />))}
+      <PlacesList />
     </div>);
 }
 
