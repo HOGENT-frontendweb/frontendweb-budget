@@ -8,6 +8,12 @@ Install all dependencies using the following command:
 pnpm install
 ```
 
+Create a `.env` with the following content and apply to your configuration:
+
+```dotenv
+VITE_API_URL=http://localhost:3000/api
+```
+
 ## Start the app
 
 ### Development
@@ -18,4 +24,3 @@ pnpm install
 
 - Build the app using `pnpm build`. This will generate a `dist` folder with the compiled files.
 - Serve this folder using a static service like Apache, Nginx or others.
-

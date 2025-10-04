@@ -1,15 +1,33 @@
-// src/components/transactions/TransactionList.jsx
 import { useState, useMemo } from 'react';
-import TransactionTable from '../../components/transactions/TransactionTable';
-import { TRANSACTION_DATA } from '../../api/mock_data';
+import TransactionsTable from '../../components/transactions/TransactionsTable';
+import AsyncData from '../../components/AsyncData';
+import useSWR from 'swr'; 
+import { getAll, deleteById } from '../../api';
+import useSWRMutation from 'swr/mutation';
 
 export default function TransactionList() {
+ 
   const [text, setText]=useState('');
   const [search, setSearch] = useState('');
+  
+  const {
+    data: transactions = [],
+    isLoading,
+    error,
+  } = useSWR('transactions', getAll); 
 
-  const filteredTransactions = useMemo(()=> TRANSACTION_DATA.filter((t) => {
-    return t.place.name.toLowerCase().includes(search.toLowerCase());
-  }), [search]);
+  const { trigger: deleteTransaction, error: deleteError } = useSWRMutation(
+    'transactions',
+    deleteById,
+  );
+  
+  const filteredTransactions = useMemo(
+    () =>
+      transactions.filter((t) => {
+        return t.place.name.toLowerCase().includes(search.toLowerCase());
+      }),
+    [search, transactions],
+  );
 
   return (
     <>
@@ -32,7 +50,11 @@ export default function TransactionList() {
           Search
         </button>
       </div>
-      <TransactionTable transactions={filteredTransactions}/>
+      <div className='mt-4'>
+        <AsyncData loading={isLoading} error={error||deleteError}>
+          <TransactionsTable transactions={filteredTransactions} onDelete={deleteTransaction} />
+        </AsyncData>
+      </div>
     </>
   );
 }

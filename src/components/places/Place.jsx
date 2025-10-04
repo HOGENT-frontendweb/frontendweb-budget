@@ -1,13 +1,13 @@
 import StarRating from './StarRating';
 import { Link } from 'react-router';
 export default function Place({ id, name, rating, onDelete, onRate }) {
+  
+  const handleRate = (newRating) => {
+    onRate({id, name, rating: newRating});
+  };
 
   const handleDelete = () => {
     onDelete(id);
-  };
-
-  const handleRate = (newRating) => {
-    onRate(id, newRating);
   };
 
   return (
