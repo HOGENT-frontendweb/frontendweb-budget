@@ -1,9 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import TransactionsTable from '../../components/transactions/TransactionsTable';
 import AsyncData from '../../components/AsyncData';
-import useSWR from 'swr'; 
+import useSWR from 'swr';
 import { getAll, deleteById } from '../../api';
 import useSWRMutation from 'swr/mutation';
+import { Link } from 'react-router';
 
 export default function TransactionList() {
  
@@ -29,30 +30,44 @@ export default function TransactionList() {
     [search, transactions],
   );
 
+  const handleDeleteTransaction = useCallback(
+    async (id) => {
+      await deleteTransaction(id);
+      alert('Transaction is removed');
+    },
+    [deleteTransaction],
+  );
+
   return (
     <>
       <h1>Transactions</h1>
-      <div className='flex mb-3 w-1/2 gap-2 mx-4'>
-        <input
-          type='search'
-          id='search'
-          className='rounded grow-1 bg-white p-1 text-gray-900 placeholder:text-gray-400 outline-1 outline-gray-300
-          focus:outline-gray-600'
-          placeholder='Search'
-          value={text}
-          onChange={(e)=> {
-            setText(e.target.value);
-          }}
-        />
-        <button type='button' className='py-2 px-2.5 rounded-md text-blue-600 border border-blue-600' onClick = {()=> {
-          setSearch(text);
-        }}>
-          Search
-        </button>
+      <div className='flex justify-between mb-3 gap-2'>
+        <div className="w-1/2 flex gap-2">
+          <input
+            type='search'
+            id='search'
+            className='flex-1 rounded bg-white p-1 text-gray-900 placeholder:text-gray-400 outline-1 outline-gray-300
+          focus:outline-blue-600'
+            placeholder='Search'
+            value={text}
+            onChange={(e)=> {
+              setText(e.target.value);
+            }}
+          />
+          <button type='button' className='py-2 px-2.5 rounded-md text-blue-600 
+          border border-blue-600 whitespace-nowrap' onClick = {()=> {
+            setSearch(text);
+          }}>
+            Search
+          </button>
+        </div>
+        <Link to='/transactions/add' className='py-2 px-2.5 rounded-md text-white border border-blue-600 bg-blue-600'>
+          Add transaction
+        </Link>
       </div>
       <div className='mt-4'>
         <AsyncData loading={isLoading} error={error||deleteError}>
-          <TransactionsTable transactions={filteredTransactions} onDelete={deleteTransaction} />
+          <TransactionsTable transactions={filteredTransactions} onDelete={handleDeleteTransaction} />
         </AsyncData>
       </div>
     </>

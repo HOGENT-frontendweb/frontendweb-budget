@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
-import { getAll, deleteById, updateById } from '../../api';
+import { getAll, deleteById, save } from '../../api';
 import PlacesCards from '../../components/places/PlacesCards';
 import AsyncData from '../../components/AsyncData';
 
@@ -10,14 +10,14 @@ const PlacesList = () => {
 
   const { trigger: deletePlace, error: deleteError } = useSWRMutation('places', deleteById);
 
-  const { trigger: updatePlace, error: saveError } = useSWRMutation('places', updateById);
+  const { trigger: updatePlace, error: saveError } = useSWRMutation('places', save);
 
   return (
     <>
       <h1>Places</h1>
 
       <AsyncData loading={isLoading} error={error || deleteError || saveError}>
-        <PlacesCards places={data} onRate={updatePlace} onDelete={deletePlace} />
+        <PlacesCards places={data} onRate={updatePlace} onDelete={deletePlace}/>
       </AsyncData>
     </>
   );

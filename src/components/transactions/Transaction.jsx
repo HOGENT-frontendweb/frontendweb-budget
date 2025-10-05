@@ -1,4 +1,7 @@
-import { IoTrashOutline } from 'react-icons/io5';
+import { IoTrashOutline, IoPencilOutline } from 'react-icons/io5';
+import { Link } from 'react-router';
+import { memo } from 'react';
+
 const dateFormat = new Intl.DateTimeFormat('nl-BE', {
   day: '2-digit',
   month: '2-digit',
@@ -12,7 +15,7 @@ const amountFormat = new Intl.NumberFormat('nl-BE', {
   minimumFractionDigits: 2,
 });
 
-export default function Transaction({ id, date, amount, user, place, onDelete }) {
+const TransactionMemoized = memo(function Transaction({ id, date, amount, user, place, onDelete }) {
   const handleDelete = () => {
     onDelete(id);
   };
@@ -22,11 +25,19 @@ export default function Transaction({ id, date, amount, user, place, onDelete })
       <td className="py-2">{user.name}</td>
       <td className="py-2">{place.name}</td>
       <td className='text-end py-2'>{amountFormat.format(amount)}</td>
-      <td className="text-end py-2"> 
-        <button className='py-2 px-2.5 rounded-md bg-blue-600' onClick={handleDelete}>
-          <IoTrashOutline />
-        </button>
+      <td className="py-2 flex justify-end"> 
+        {onDelete ?
+          <>
+            <button className='py-2 px-2.5 rounded-md bg-blue-600' onClick={handleDelete}>
+              <IoTrashOutline />
+            </button>
+            <Link to={`/transactions/edit/${id}`} className='mx-2 py-2 px-2.5 rounded-md bg-blue-600'>
+              <IoPencilOutline />
+            </Link>
+          </>:''}
       </td>
     </tr>
   );
-}
+});
+
+export default TransactionMemoized;

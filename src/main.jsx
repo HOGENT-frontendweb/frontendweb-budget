@@ -10,6 +10,7 @@ import About from './pages/about/About.jsx';
 import { Services, History, Location } from './pages/about/About.jsx';
 import PlaceDetail from './pages/places/PlaceDetail.jsx';
 import Layout from './pages/Layout.jsx';
+import AddOrEditTransaction from './pages/transactions/AddOrEditTransaction.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,23 @@ const router = createBrowserRouter([
         path: '/',
         element: <Navigate replace to='/transactions' />,
       },
-      { path: 'transactions', Component: TransactionList },
+      {
+        path: '/transactions',
+        children: [
+          {
+            index: true,
+            element: <TransactionList />,
+          },
+          {
+            path: 'add',
+            element: <AddOrEditTransaction />,
+          },
+          {
+            path: 'edit/:id',
+            element: <AddOrEditTransaction />,
+          },
+        ],
+      },
       {
         path: '/places',
         children: [
