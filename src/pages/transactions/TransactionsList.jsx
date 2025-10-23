@@ -54,14 +54,13 @@ export default function TransactionList() {
               setText(e.target.value);
             }}
           />
-          <button type='button' className='py-2 px-2.5 rounded-md text-blue-600 
-          border border-blue-600 whitespace-nowrap' onClick = {()=> {
+          <button type='button' className='secondary' onClick = {()=> {
             setSearch(text);
           }}>
             Search
           </button>
         </div>
-        <Link to='/transactions/add' className='py-2 px-2.5 rounded-md text-white border border-blue-600 bg-blue-600'>
+        <Link to='/transactions/add' className='primary'>
           Add transaction
         </Link>
       </div>
