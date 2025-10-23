@@ -5,6 +5,7 @@ const validationRules = {
   userId: {
     required: 'User is required',
     min: { value: 1, message: 'UserId must be minimum 1' },
+    valueAsNumber:true,
   },
   date: {
     required: 'Date is required',
