@@ -3,7 +3,8 @@ import Transaction from './Transaction';
 function TransactionsTable({ transactions, onDelete}) {
   if (transactions.length === 0) {
     return (
-      <div className='p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50'>There are no transactions yet.</div>
+      <div className='p-4 mb-4 text-sm text-blue-800 rounded-lg 
+      bg-blue-50' data-cy='no_transactions_message'>There are no transactions yet.</div>
     );
   }
 

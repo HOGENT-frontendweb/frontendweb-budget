@@ -95,6 +95,7 @@ export default function TransactionForm({places = [], transaction = EMPTY_TRANSA
           placeholder='user id'
           type='number'
           validationRules={validationRules.userId}
+          data-cy='user_input'
         />
 
         <LabelInput
@@ -103,6 +104,7 @@ export default function TransactionForm({places = [], transaction = EMPTY_TRANSA
           placeholder='date'
           type='date'
           validationRules={validationRules.date}
+          data-cy='date_input'
         />
 
         <SelectList  
@@ -110,7 +112,8 @@ export default function TransactionForm({places = [], transaction = EMPTY_TRANSA
           name='placeId'
           placeholder='---select a place---'
           items={places}
-          validationRules={validationRules.placeId} />
+          validationRules={validationRules.placeId} 
+          data-cy='place_input'/>
 
         <LabelInput
           label='Amount'
@@ -118,10 +121,11 @@ export default function TransactionForm({places = [], transaction = EMPTY_TRANSA
           placeholder='amount'
           type='number'
           validationRules={validationRules.amount}
+          data-cy='amount_input'
         />
 
         <div className='flex justify-end'>
-          <button type='submit' className='primary'  disabled={isSubmitting}>
+          <button type='submit' className='primary'  disabled={isSubmitting}  data-cy='submit_transaction' >
             {transaction?.id
               ? 'Save transaction'
               : 'Add transaction'}

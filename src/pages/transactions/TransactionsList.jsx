@@ -53,10 +53,11 @@ export default function TransactionList() {
             onChange={(e)=> {
               setText(e.target.value);
             }}
+            data-cy='transactions_search_input'
           />
           <button type='button' className='secondary' onClick = {()=> {
             setSearch(text);
-          }}>
+          }} data-cy='transactions_search_btn'>
             Search
           </button>
         </div>

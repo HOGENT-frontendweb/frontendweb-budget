@@ -20,18 +20,18 @@ const TransactionMemoized = memo(function Transaction({ id, date, amount, user, 
     onDelete(id);
   };
   return (
-    <tr className="border-b border-gray-200 dark:border-gray-800">
-      <td className="py-2">{dateFormat.format(new Date(date))}</td>
-      <td className="py-2">{user.name}</td>
-      <td className="py-2">{place.name}</td>
-      <td className='text-end py-2'>{amountFormat.format(amount)}</td>
+    <tr className="border-b border-gray-200 dark:border-gray-800" data-cy="transaction">
+      <td className="py-2" data-cy='transaction_date'>{dateFormat.format(new Date(date))}</td>
+      <td className="py-2" data-cy='transaction_user'>{user.name}</td>
+      <td className="py-2" data-cy='transaction_place'>{place.name}</td>
+      <td className='text-end py-2' data-cy='transaction_amount'>{amountFormat.format(amount)}</td>
       <td className="py-2 flex justify-end"> 
         {onDelete ?
           <>
-            <button className='primary mr-1' onClick={handleDelete}>
+            <button className='primary mr-1' onClick={handleDelete} data-cy='transaction_remove_btn'>
               <IoTrashOutline />
             </button>
-            <Link to={`/transactions/edit/${id}`} className='primary'>
+            <Link to={`/transactions/edit/${id}`} className='primary' data-cy='transaction_edit_btn'>
               <IoPencilOutline />
             </Link>
           </>:''}

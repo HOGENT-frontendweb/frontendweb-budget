@@ -32,7 +32,7 @@ const LabelInput  = ({
         placeholder={placeholder}
         {...rest}
       />
-      {hasError && <p className="text-red-500 text-sm mt-1">{errors[name].message}</p> }
+      {hasError && <p className="text-red-500 text-sm mt-1" data-cy="label_input_error">{errors[name].message}</p> }
     </div>);
 };
 
