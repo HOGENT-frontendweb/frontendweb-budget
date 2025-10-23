@@ -10,7 +10,7 @@ function TransactionsTable({ transactions, onDelete}) {
   return (
     <table className='table-auto w-full border-collapse mb-4'>
       <thead>
-        <tr className="border-b-2 border-gray-300">
+        <tr className="border-b-2 border-gray-300 dark:border-gray-700">
           <th className="text-start py-2">Date</th>
           <th className="text-start py-2">User</th>
           <th className="text-start py-2">Place</th>

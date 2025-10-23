@@ -1,22 +1,22 @@
 import js from '@eslint/js';
-import stylistic from '@stylistic/eslint-plugin';// 👈 5
+import stylistic from '@stylistic/eslint-plugin';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import { defineConfig, globalIgnores } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['dist']),// 👈 1
+  globalIgnores(['dist']),
   {
-    files: ['**/*.{js,jsx}'],// 👈 2
+    files: ['**/*.{js,jsx}'],
     plugins: {
       '@stylistic': stylistic,
-    },// 👈 5
+    },
     extends: [
       js.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
-    ],    // 👈 4
+    ],  
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -25,10 +25,9 @@ export default defineConfig([
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
-    },// 👈 3
+    },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-      // 👇 6
       'react/jsx-no-target-blank': 'off',
       'react-refresh/only-export-components': [
         'warn',
