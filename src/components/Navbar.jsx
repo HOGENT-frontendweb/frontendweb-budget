@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { BsFillPiggyBankFill } from 'react-icons/bs';
 import { IoMoonSharp, IoSunny } from 'react-icons/io5';
 import { useTheme } from '../contexts';
+import { useAuth } from '../contexts/auth';
 
 const NavItem = ({ to, children, options}) => {
   return (
@@ -32,6 +33,22 @@ const ThemeToggle = () => {
   >
     {darkmode ? <IoMoonSharp color='white' size={20}/> : <IoSunny size={20}/>}
   </button>);
+};
+
+const AuthButtons = ()=> {
+  const { isAuthed } = useAuth();
+  return  isAuthed ? (
+    <Link className='primary' to='/logout'>
+      Logout
+    </Link>
+  ) : (
+    <>
+      <Link className='primary' to='/login'>
+        Login
+      </Link>
+      <Link className="text-gray-400 dark:text-white" to='/register'>Registreer</Link>
+    </>
+  );
 };
 
 export default function Navbar() {
@@ -65,6 +82,7 @@ export default function Navbar() {
           <NavItem to="/about">About</NavItem>
         </ul>
         <div className="hidden lg:flex lg:items-center lg:space-x-4">
+          <AuthButtons/>
           <ThemeToggle />
         </div>
       </nav>
@@ -74,6 +92,7 @@ export default function Navbar() {
         max-w-sm py-6 px-6 bg-white border-r overflow-y-auto space-between dark:bg-black">
           <div className="flex items-center mb-8">
             <Logo/>
+            <AuthButtons/>
             <ThemeToggle />
             <button onClick={toggleNavbar} >
               <svg className="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500 dark:text-white"

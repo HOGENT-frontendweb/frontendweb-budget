@@ -12,6 +12,11 @@ import PlaceDetail from './pages/places/PlaceDetail.jsx';
 import Layout from './pages/Layout.jsx';
 import AddOrEditTransaction from './pages/transactions/AddOrEditTransaction.jsx';
 import ThemeProvider from './contexts/Theme.context.jsx';
+import { AuthProvider } from './contexts/Auth.context';
+import Login from './pages/Login.jsx';
+import Logout from './pages/Logout.jsx';
+import Register from './pages/Register.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,24 +27,38 @@ const router = createBrowserRouter([
         element: <Navigate replace to='/transactions' />,
       },
       {
+        path: '/login',
+        Component : Login,
+      },
+      {
+        path: '/register',
+        Component : Register,
+      },
+      {
+        path: '/logout',
+        Component: Logout,
+      },
+      {
         path: '/transactions',
+        Component:PrivateRoute,
         children: [
           {
             index: true,
-            element: <TransactionList />,
+            Component: TransactionList ,
           },
           {
             path: 'add',
-            element: <AddOrEditTransaction />,
+            Component: AddOrEditTransaction,
           },
           {
             path: 'edit/:id',
-            element: <AddOrEditTransaction />,
+            Component: AddOrEditTransaction,
           },
         ],
       },
       {
         path: '/places',
+        Component:PrivateRoute,
         children: [
           {
             index: true,
@@ -79,8 +98,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AuthProvider>
   </StrictMode>,
 );

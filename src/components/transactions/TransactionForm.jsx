@@ -4,11 +4,6 @@ import LabelInput from '../LabelInput';
 import SelectList from '../SelectList';
 
 const validationRules = {
-  userId: {
-    required: 'User is required',
-    min: { value: 1, message: 'UserId must be minimum 1' },
-    valueAsNumber:true,
-  },
   date: {
     required: 'Date is required',
     valueAsDate: true,
@@ -68,7 +63,6 @@ export default function TransactionForm({places = [], transaction = EMPTY_TRANSA
       date: toDateInputString(transaction?.date),
       placeId: transaction?.place.id,
       amount: transaction?.amount,
-      userId: transaction?.user.id,
     },
   });
 
@@ -89,15 +83,6 @@ export default function TransactionForm({places = [], transaction = EMPTY_TRANSA
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <LabelInput
-          label='User Id'
-          name='userId'
-          placeholder='user id'
-          type='number'
-          validationRules={validationRules.userId}
-          data-cy='user_input'
-        />
-
         <LabelInput
           label='Date'
           name='date'
