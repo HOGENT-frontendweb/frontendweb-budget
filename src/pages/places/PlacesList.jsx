@@ -6,7 +6,7 @@ import AsyncData from '../../components/AsyncData';
 
 const PlacesList = () => {
 
-  const { data, error, isLoading } = useSWR('places', getAll);
+  const { data:places=[], error, isLoading } = useSWR('places', getAll);
 
   const { trigger: deletePlace, error: deleteError } = useSWRMutation('places', deleteById);
 
@@ -17,7 +17,7 @@ const PlacesList = () => {
       <h1>Places</h1>
 
       <AsyncData loading={isLoading} error={error || deleteError || saveError}>
-        <PlacesCards places={data} onRate={updatePlace} onDelete={deletePlace}/>
+        <PlacesCards places={places} onRate={updatePlace} onDelete={deletePlace}/>
       </AsyncData>
     </>
   );
