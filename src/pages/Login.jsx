@@ -61,6 +61,7 @@ export default function Login() {
             name='email'
             placeholder='your@email.com'
             validationRules={validationRules.email}
+            data-cy='email_input'
           />
           <LabelInput
             label='password'
@@ -68,12 +69,14 @@ export default function Login() {
             placeholder='password'
             name='password'
             validationRules={validationRules.password}
+            data-cy='password_input'
           />
           <div className='flex justify-end'>
             <button
               type='submit'
               className='primary'
               disabled={loading}
+              data-cy='submit_btn'
             >
               Sign in
             </button>
