@@ -20,6 +20,10 @@ VITE_API_URL=http://localhost:3000/api
 
 - Start the app using `pnpm dev`. It runs on <http://localhost:5137> by default.
 
+### Testing
+
+- Start the cypress tests using `pnpm test`.Make sure the website is running on <http://localhost:5137>, and the backend database is seeded.
+
 ### Production
 
 - Build the app using `pnpm build`. This will generate a `dist` folder with the compiled files.
