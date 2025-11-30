@@ -1,4 +1,8 @@
-node_modules
+.env*
+.gitignore
 .vscode
+
 cypress
 dist
+eslint.config.js
+node_modules
